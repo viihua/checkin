@@ -1,6 +1,12 @@
 {
+  "name": "glados-checkin",
+  "version": "1.0.0",
   "type": "module",
+  "main": "index.js",
   "scripts": {
-    "main": "node main.js"
+    "main": "node index.js"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.0"
   }
 }
