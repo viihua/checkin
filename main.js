@@ -17,14 +17,14 @@ const glados = async () => {
       headers,
     }).then((r) => r.json())
     return [
-      '❌签到成功❌',
+      'XX签到成功XX',
       `获得积分：${Number(checkin.points)}`,
       `剩余天数：${Number(status.data.leftDays)}`,
       `返回信息：${checkin.message}`,
     ]
   } catch (error) {
     return [
-      '❌签到错误❌',
+      'X签到错误X',
       `错误信息：${error}`,
       `仓库地址：<${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}>`,
     ]
