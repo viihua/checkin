@@ -1,21 +1,47 @@
-name: run
+name: GLaDOS Auto Checkin
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:  # 手动触发
   push:
+    branches: [ main ]
   schedule:
-    - cron: 10 02 * * *
+    - cron: '10 2 * * *'  # 每天 UTC 02:10（北京时间 10:10）
 
 jobs:
-  run:
+  checkin:
     runs-on: ubuntu-latest
+    
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: 18
-      - run: npm ci
-      - run: npm run main
+          
+      - name: Create script file
+        run: |
+          cat > glados.js << 'EOF'
+          // 这里粘贴您的完整 JavaScript 代码
+          // 使用我上面提供的带详细日志的版本
+          
+          const glados = async () => {
+            console.log('🚀 GLaDOS 签到脚本开始执行')
+            // ... 完整代码 ...
+          }
+          
+          // ... 其他函数 ...
+          
+          main()
+          EOF
+          
+          echo "✅ 脚本文件创建完成"
+          echo "📄 文件内容预览："
+          head -20 glados.js
+      
+      - name: Run checkin script
+        run: node glados.js
         env:
           GLADOS: ${{ secrets.GLADOS }}
           NOTIFY: ${{ secrets.NOTIFY }}
