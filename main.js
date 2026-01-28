@@ -24,7 +24,7 @@ const glados = async () => {
     ]
   } catch (error) {
     return [
-      '签到失败！',
+      '签到错误！',
       `错误信息：${error}`,
       `仓库地址：<${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}>`,
     ]
