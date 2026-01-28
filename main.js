@@ -17,7 +17,7 @@ const glados = async () => {
       headers,
     }).then((r) => r.json())
     return [
-      '签到成功！',
+      '签到成功！❌❌❌❌❌❌❌❌❌❌❌❌',
       `获得积分：${Number(checkin.points)}`,
       `剩余天数：${Number(status.data.leftDays)}`,
       `返回信息：${checkin.message}`,
