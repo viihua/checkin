@@ -30,7 +30,7 @@ const glados = async () => {
     const checkinResponse = await fetch('https://glados.cloud/api/user/checkin', {
       method: 'POST',
       headers: { ...headers, 'content-type': 'application/json' },
-      body: '{"token":"glados.one"}',
+      body: '{"token":"glados.cloud"}',
     });
     
     console.log('📊 签到响应状态:', checkinResponse.status);
