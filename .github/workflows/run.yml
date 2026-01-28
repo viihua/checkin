@@ -5,7 +5,7 @@ on:
   push:
     branches: [ main ]
   schedule:
-    - cron: '10 2 * * *'  # 注意：cron要用引号包裹
+    - cron: '10 2 * * *'
 
 jobs:
   run:
@@ -18,48 +18,32 @@ jobs:
         with:
           node-version: 18
           
-      - name: Install dependencies
+      - name: Create package.json with dependencies
         run: |
-          # 如果没有 package.json，创建一个简单的
-          if [ ! -f package.json ]; then
-            echo '{"name":"glados-checkin","version":"1.0.0"}' > package.json
-          fi
-          npm install  # 使用 install 而不是 ci
+          cat > package.json << 'EOF'
+          {
+            "name": "glados-checkin",
+            "version": "1.0.0",
+            "type": "module",
+            "dependencies": {
+              "node-fetch": "^3.3.0"
+            }
+          }
+          EOF
+          npm install
           
       - name: Create and run checkin script
         run: |
-          # 直接创建并运行脚本
           cat > checkin.js << 'EOF'
-          console.log('=== 开始执行 GLaDOS 签到 ===');
-          console.log('当前时间:', new Date().toISOString());
-          
-          // 检查环境变量
-          console.log('GLADOS 变量:', process.env.GLADOS ? '已设置' : '未设置');
-          console.log('NOTIFY 变量:', process.env.NOTIFY ? '已设置' : '未设置');
-          
-          // 这里继续粘贴您的完整代码
-          const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-          
-          const glados = async () => {
-            // ... 您的代码 ...
-          };
-          
-          const notify = async (contents) => {
-            // ... 您的代码 ...
-          };
-          
-          const main = async () => {
-            console.log('执行签到...');
-            const result = await glados();
-            console.log('签到结果:', result);
-            console.log('发送通知...');
-            await notify(result);
-            console.log('完成!');
-          };
-          
-          main().catch(console.error);
+          // 这里粘贴上面完整的修复代码
+          // 从 console.log('=== 开始执行 GLaDOS 签到 ==='); 开始
+          // 到 main(); 结束
           EOF
           
+          echo "📄 脚本内容预览（前10行）："
+          head -10 checkin.js
+          
+          echo "🚀 开始执行脚本..."
           node checkin.js
         env:
           GLADOS: ${{ secrets.GLADOS }}
